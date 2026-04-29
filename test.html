@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings | LuxeJewel Admin Console</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#695f71",
+                        "surface-variant": "#e9dfed",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#cec2d7",
+                        "tertiary": "#612e00",
+                        "primary": "#5600a2",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e9dfed",
+                        "outline": "#7d7386",
+                        "surface": "#fff7ff",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f5eaf9",
+                        "on-surface": "#1e1a23",
+                        "secondary-container": "#e9dbf0",
+                        "primary-container": "#7317cf",
+                        "tertiary-fixed": "#ffdcc6",
+                        "secondary-fixed": "#ebdef3",
+                        "on-tertiary-fixed-variant": "#713700",
+                        "on-primary-fixed": "#2a0054",
+                        "surface-dim": "#e0d7e5",
+                        "on-primary-fixed-variant": "#6400ba",
+                        "surface-container-low": "#faf0ff",
+                        "on-secondary": "#ffffff",
+                        "background": "#fff7ff",
+                        "surface-tint": "#7e2bda",
+                        "tertiary-container": "#844100",
+                        "tertiary-fixed-dim": "#ffb785",
+                        "on-surface-variant": "#4c4354",
+                        "inverse-primary": "#d9b9ff",
+                        "secondary": "#645b6d",
+                        "on-background": "#1e1a23",
+                        "inverse-surface": "#342e39",
+                        "on-tertiary-container": "#ffb887",
+                        "secondary-fixed-dim": "#cfc2d7",
+                        "primary-fixed": "#eedcff",
+                        "surface-container-high": "#efe5f3",
+                        "on-primary-container": "#dabbff",
+                        "on-tertiary-fixed": "#301400",
+                        "on-secondary-fixed": "#201827",
+                        "on-secondary-fixed-variant": "#4c4354",
+                        "inverse-on-surface": "#f7edfc",
+                        "surface-bright": "#fff7ff",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#d9b9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "item-gap": "0.75rem",
+                        "container-padding": "2rem",
+                        "gutter": "1rem",
+                        "card-padding": "1.5rem",
+                        "section-gap": "1.5rem"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-base": ["Manrope"],
+                        "label-caps": ["Manrope"],
+                        "display-xl": ["Manrope"],
+                        "body-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["1.5rem", { "lineHeight": "2rem", "fontWeight": "800" }],
+                        "headline-md": ["1.25rem", { "lineHeight": "1.75rem", "fontWeight": "700" }],
+                        "body-base": ["0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" }],
+                        "label-caps": ["0.625rem", { "lineHeight": "1rem", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "display-xl": ["1.875rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.025em", "fontWeight": "900" }],
+                        "body-sm": ["0.75rem", { "lineHeight": "1rem", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-nav { backdrop-filter: blur(12px); }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e9dbf0; border-radius: 10px; }
+        .modal-overlay { background-color: rgba(30, 26, 35, 0.4); backdrop-filter: blur(4px); }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased font-body-base">
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden lg:flex flex-col w-64 h-screen fixed left-0 top-0 border-r border-purple-50 bg-white z-50 p-4 space-y-2">
+<div class="px-2 py-6 mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="diamond">diamond</span>
+</div>
+<div>
+<h1 class="font-headline-md text-slate-900 leading-none">LuxeJewel</h1>
+<p class="text-[10px] text-slate-500 font-bold tracking-widest uppercase mt-1">Admin Console</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1 overflow-y-auto custom-scrollbar">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 rounded-lg transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 rounded-lg transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="diamond">diamond</span>
+<span class="font-medium">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 rounded-lg transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-medium">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 rounded-lg transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-medium">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 rounded-lg transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-medium">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-white rounded-lg shadow-purple-200/50 transition-transform duration-200 translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</nav>
+<div class="pt-4 border-t border-purple-50 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-medium">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container/20 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-medium">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Shell -->
+<div class="lg:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-0 lg:left-64 h-16 bg-white/80 backdrop-blur-md flex items-center justify-between px-6 z-40 border-b border-purple-50 shadow-sm">
+<div class="flex items-center flex-1">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+<input class="w-full bg-slate-50 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-slate-400" placeholder="Search settings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-slate-500 hover:bg-purple-50 rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-4 h-4 bg-primary text-white text-[10px] flex items-center justify-center rounded-full font-bold">2</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-purple-50 rounded-full transition-colors hidden sm:block">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="h-8 w-px bg-purple-50 mx-1"></div>
+<div class="flex items-center gap-3 pl-2 group cursor-pointer">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-slate-900 leading-none">Admin User</p>
+<p class="text-[10px] text-slate-500 mt-1 uppercase tracking-tighter">Chief Officer</p>
+</div>
+<img alt="Administrator Profile" class="w-9 h-9 rounded-full object-cover ring-2 ring-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz2ENC0bgoT2DoxT8Vfd6xQ2U6lXTzQcBDLQMwLOj5ipvcKzU3y8HCS1fVf4mYmTUkRNzsZjxMTyZtyJ8lRrfxKGEbuDkZw2CAd_0yyChJuIa1qGIFo4OeJT1lRGO91ajtpyB-bKK25bv5_M4gxh8TAc9N7YOOQsVLGBAEGk7bl5KtUrWHiNGAU4Lu174G7-Ihm110tYrVJ3p-tJ9pxW-_QPZk_qa2EpfXNWCxp6uWQwJ25g2Jd4MxCkHfRjSVZ7kwoaFdxm92odY"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="mt-16 p-6 lg:p-8 flex-1 bg-[#fdfaff]">
+<div class="max-w-5xl mx-auto">
+<div class="mb-8">
+<h2 class="font-display-xl text-slate-900">Account Settings</h2>
+<p class="text-on-secondary-container mt-1">Manage your administrative preferences and security controls.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<!-- Vertical Tab System -->
+<div class="md:col-span-1 space-y-1">
+<button class="w-full flex items-center gap-3 px-4 py-3 bg-white text-primary rounded-xl shadow-sm border border-primary/10 font-bold transition-all">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-sm">Profile</span>
+</button>
+<button class="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-white rounded-xl transition-all border border-transparent hover:border-primary/5">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="text-sm">Notifications</span>
+</button>
+<button class="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-white rounded-xl transition-all border border-transparent hover:border-primary/5">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span class="text-sm">Security</span>
+</button>
+<button class="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-white rounded-xl transition-all border border-transparent hover:border-primary/5">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="text-sm">Communications</span>
+</button>
+<button class="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-white rounded-xl transition-all border border-transparent hover:border-primary/5">
+<span class="material-symbols-outlined" data-icon="store">store</span>
+<span class="text-sm">Store Preferences</span>
+</button>
+</div>
+<!-- Content Cards Stack -->
+<div class="md:col-span-3 space-y-8">
+<!-- Profile Settings -->
+<section class="bg-white rounded-xl border border-primary/10 overflow-hidden" id="profile">
+<div class="p-6 border-b border-slate-50 bg-slate-50/30">
+<h3 class="font-headline-md text-slate-900">Profile Settings</h3>
+</div>
+<div class="p-6">
+<div class="flex flex-col sm:flex-row gap-8 items-start">
+<div class="relative">
+<img alt="Avatar" class="w-24 h-24 rounded-2xl object-cover ring-4 ring-purple-50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPFMSBroXfXT3KSGEK-5g8CpVuQIOzSMeRopu66HtD5jAj24SbZiq-tXkrtd9v8zUNa_oP2P5jz0Lu8odW1ges9nz_BF4VfELtDW8JRuoO5YpJgSS2hD7DQTnaSrtf2aBe9OlKMT11LBZ4kBDjWAAUsiDiMvDgiIkmiuOwS2ps5j3GObhnpbqcS3LNQE43xE4alOToiPLT9M540EEXDNfAGnsq6dDdXk4CFk9DDmtdhMbV3DNK7B3SvtJCYMxUDWaiXaI8tBFQxq0"/>
+<button class="absolute -bottom-2 -right-2 bg-primary text-white p-2 rounded-lg shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+<div class="flex-1 w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="space-y-1.5">
+<label class="font-label-caps text-slate-500">FULL NAME</label>
+<input class="w-full bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 px-4 py-2.5" type="text" value="Alexander Sterling"/>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-caps text-slate-500">EMAIL ADDRESS</label>
+<input class="w-full bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 px-4 py-2.5" type="email" value="alexander@luxejewel.com"/>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-caps text-slate-500">PHONE NUMBER</label>
+<input class="w-full bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 px-4 py-2.5" type="text" value="+1 (555) 234-5678"/>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-caps text-slate-500">ADMIN ROLE</label>
+<input class="w-full bg-slate-100 border-none rounded-lg px-4 py-2.5 text-slate-400 cursor-not-allowed" disabled="" type="text" value="System Administrator"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Notification Settings -->
+<section class="bg-white rounded-xl border border-primary/10 overflow-hidden" id="notifications">
+<div class="p-6 border-b border-slate-50 bg-slate-50/30">
+<h3 class="font-headline-md text-slate-900">Notification Settings</h3>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex items-center justify-between p-4 rounded-xl hover:bg-purple-50/50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</div>
+<div>
+<p class="font-bold text-slate-900">Email Alerts</p>
+<p class="text-xs text-slate-500">Receive inventory and sales reports via email.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 rounded-xl hover:bg-purple-50/50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+</div>
+<div>
+<p class="font-bold text-slate-900">Push Notifications</p>
+<p class="text-xs text-slate-500">Get real-time browser alerts for new orders.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 rounded-xl hover:bg-purple-50/50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="sms">sms</span>
+</div>
+<div>
+<p class="font-bold text-slate-900">SMS Updates</p>
+<p class="text-xs text-slate-500">Critical security alerts sent to your phone.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Security & Authentication (Updated) -->
+<section class="bg-white rounded-xl border border-primary/10 overflow-hidden" id="security">
+<div class="p-6 border-b border-slate-50 bg-slate-50/30">
+<h3 class="font-headline-md text-slate-900">Security &amp; Authentication</h3>
+</div>
+<div class="p-6 space-y-8">
+<!-- Change Password Form -->
+<div class="space-y-6">
+<h4 class="text-sm font-bold text-slate-700 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+                                        Change Password
+                                    </h4>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="space-y-1.5">
+<label class="font-label-caps text-slate-500">CURRENT PASSWORD</label>
+<input class="w-full bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 px-4 py-2.5 text-sm" placeholder="••••••••" type="password"/>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-caps text-slate-500">NEW PASSWORD</label>
+<input class="w-full bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 px-4 py-2.5 text-sm" placeholder="••••••••" type="password"/>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-caps text-slate-500">CONFIRM NEW PASSWORD</label>
+<input class="w-full bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 px-4 py-2.5 text-sm" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div class="flex justify-end">
+<button class="px-6 py-2 bg-primary text-white rounded-lg font-bold text-sm shadow-lg shadow-primary/10 active:scale-95 transition-transform">Update Password</button>
+</div>
+</div>
+<div class="h-px bg-slate-50"></div>
+<!-- Detailed 2FA Activation Flow -->
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<h4 class="text-sm font-bold text-slate-700 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="verified_user">verified_user</span>
+                                            Two-Factor Authentication (2FA)
+                                        </h4>
+<span class="px-2 py-0.5 bg-error-container text-error text-[10px] font-bold rounded uppercase">Disabled</span>
+</div>
+<div class="bg-purple-50/30 border border-primary/5 p-6 rounded-xl space-y-6">
+<p class="text-sm text-slate-600 max-w-2xl leading-relaxed">Protect your administrative account by requiring a security code from your mobile device every time you sign in.</p>
+<div class="flex flex-col md:flex-row gap-8 items-start">
+<div class="bg-white p-3 rounded-xl border border-purple-50 shadow-sm">
+<div class="w-32 h-32 bg-slate-100 flex items-center justify-center rounded-lg border-2 border-dashed border-slate-200">
+<span class="material-symbols-outlined text-slate-300 text-4xl" data-icon="qr_code_2">qr_code_2</span>
+</div>
+</div>
+<div class="flex-1 space-y-4">
+<div class="space-y-1">
+<p class="text-sm font-bold text-slate-900">1. Scan QR Code</p>
+<p class="text-xs text-slate-500 leading-relaxed">Use an authenticator app (like Google Authenticator or Authy) to scan the code on the left.</p>
+</div>
+<div class="space-y-1">
+<p class="text-sm font-bold text-slate-900">2. Enter Verification Code</p>
+<div class="flex gap-2">
+<input class="w-40 bg-white border border-purple-100 rounded-lg focus:ring-2 focus:ring-primary/20 px-4 py-2 text-sm" placeholder="Enter 6-digit code" type="text"/>
+<button class="px-4 py-2 bg-primary text-white text-xs font-bold rounded-lg hover:bg-primary/90 transition-all">Verify &amp; Enable</button>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-4 border-t border-purple-50">
+<button class="text-xs text-primary font-bold hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="vpn_key">vpn_key</span>
+                                                Can't scan the QR code? Use setup key instead
+                                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Customer Communications (New Section) -->
+<section class="bg-white rounded-xl border border-primary/10 overflow-hidden" id="communications">
+<div class="p-6 border-b border-slate-50 bg-slate-50/30">
+<h3 class="font-headline-md text-slate-900">Customer Communications</h3>
+</div>
+<div class="p-6 space-y-8">
+<!-- Send Notification Form -->
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<h4 class="text-sm font-bold text-slate-700 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="campaign">campaign</span>
+                                            Broadcast New Notification
+                                        </h4>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="space-y-1.5">
+<label class="font-label-caps text-slate-500">SUBJECT LINE</label>
+<input class="w-full bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 px-4 py-2.5 text-sm" placeholder="e.g. Exclusive Weekend Sale is Live!" type="text"/>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-caps text-slate-500">MESSAGE BODY</label>
+<textarea class="w-full bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 px-4 py-3 text-sm min-h-[120px]" placeholder="Type your message here..."></textarea>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 bg-slate-50 rounded-xl">
+<div class="flex items-center gap-6">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" name="audience" type="radio"/>
+<span class="text-sm font-medium text-slate-600 group-hover:text-primary transition-colors">Send to All Customers</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input name="audience" type="radio"/>
+<span class="text-sm font-medium text-slate-600 group-hover:text-primary transition-colors">Select Segment</span>
+</label>
+</div>
+<button class="w-full sm:w-auto px-8 py-2.5 bg-primary text-white rounded-lg font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="send">send</span>
+                                                Broadcast Message
+                                            </button>
+</div>
+</div>
+</div>
+<div class="h-px bg-slate-50"></div>
+<!-- Sent Notifications History -->
+<div class="space-y-4">
+<h4 class="text-sm font-bold text-slate-700">Notification History</h4>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-separate border-spacing-y-2">
+<thead>
+<tr class="text-slate-400">
+<th class="px-4 py-2 font-label-caps text-[10px]">DATE</th>
+<th class="px-4 py-2 font-label-caps text-[10px]">SUBJECT</th>
+<th class="px-4 py-2 font-label-caps text-[10px]">RECIPIENTS</th>
+<th class="px-4 py-2 font-label-caps text-[10px] text-right">ACTION</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="bg-slate-50/50 hover:bg-slate-50 transition-colors">
+<td class="px-4 py-4 rounded-l-xl text-slate-500">Oct 24, 2023</td>
+<td class="px-4 py-4 font-bold text-slate-900">Winter Collection Sneak...</td>
+<td class="px-4 py-4 text-slate-600">VIP Customers (1,240)</td>
+<td class="px-4 py-4 rounded-r-xl text-right">
+<button class="px-3 py-1.5 text-primary bg-white border border-primary/20 rounded-lg font-bold text-xs hover:bg-primary hover:text-white transition-all" onclick="document.getElementById('msg-modal').classList.remove('hidden')">View Message</button>
+</td>
+</tr>
+<tr class="bg-slate-50/50 hover:bg-slate-50 transition-colors">
+<td class="px-4 py-4 rounded-l-xl text-slate-500">Oct 12, 2023</td>
+<td class="px-4 py-4 font-bold text-slate-900">Platform Update: Free Ship...</td>
+<td class="px-4 py-4 text-slate-600">All Customers (15,800)</td>
+<td class="px-4 py-4 rounded-r-xl text-right">
+<button class="px-3 py-1.5 text-primary bg-white border border-primary/20 rounded-lg font-bold text-xs hover:bg-primary hover:text-white transition-all">View Message</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<!-- Store Preferences (Expanded) -->
+<section class="bg-white rounded-xl border border-primary/10 overflow-hidden mb-12" id="preferences">
+<div class="p-6 border-b border-slate-50 bg-slate-50/30">
+<h3 class="font-headline-md text-slate-900">Store Preferences</h3>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
+<div class="space-y-6">
+<h4 class="text-sm font-bold text-slate-700 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="payments">payments</span>
+                                            Localization &amp; Currency
+                                        </h4>
+<div class="space-y-4">
+<div class="space-y-1.5">
+<label class="font-label-caps text-slate-500">BASE CURRENCY</label>
+<div class="relative">
+<select class="w-full appearance-none bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 px-4 py-2.5 pr-10 text-sm">
+<option>USD ($) United States Dollar</option>
+<option>EUR (€) Euro</option>
+<option>GBP (£) British Pound</option>
+<option>CHF (CHF) Swiss Franc</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-caps text-slate-500">TAX DISPLAY</label>
+<div class="flex gap-4">
+<label class="flex-1 flex items-center justify-center p-3 rounded-lg border border-purple-100 bg-slate-50 cursor-pointer hover:border-primary/50 transition-colors">
+<input class="sr-only peer" name="tax" type="radio"/>
+<span class="text-xs font-bold text-slate-500 peer-checked:text-primary">Inclusive</span>
+</label>
+<label class="flex-1 flex items-center justify-center p-3 rounded-lg border border-primary bg-primary/5 cursor-pointer">
+<input checked="" class="sr-only peer" name="tax" type="radio"/>
+<span class="text-xs font-bold text-primary">Exclusive</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<h4 class="text-sm font-bold text-slate-700 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="language">language</span>
+                                            Regional Settings
+                                        </h4>
+<div class="space-y-4">
+<div class="space-y-1.5">
+<label class="font-label-caps text-slate-500">TIMEZONE</label>
+<div class="relative">
+<select class="w-full appearance-none bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 px-4 py-2.5 pr-10 text-sm">
+<option>(UTC-05:00) Eastern Time (US &amp; Canada)</option>
+<option>(UTC+00:00) London, United Kingdom</option>
+<option>(UTC+01:00) Paris, Zurich</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-caps text-slate-500">SYSTEM LANGUAGE</label>
+<div class="relative">
+<select class="w-full appearance-none bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 px-4 py-2.5 pr-10 text-sm">
+<option>English (US)</option>
+<option>French (FR)</option>
+<option>German (DE)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-10 pt-6 border-t border-slate-50 flex justify-end">
+<button class="w-full md:w-auto px-10 py-3 bg-primary text-white rounded-lg font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="save">save</span>
+                                        Save All Changes
+                                    </button>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Modal for View Message -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 modal-overlay" id="msg-modal">
+<div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl overflow-hidden transform transition-all">
+<div class="p-6 border-b border-slate-50 flex items-center justify-between bg-slate-50/30">
+<h3 class="font-headline-md text-slate-900">Sent Notification Details</h3>
+<button class="p-2 hover:bg-slate-100 rounded-full transition-colors" onclick="document.getElementById('msg-modal').classList.add('hidden')">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<div class="p-8 space-y-6">
+<div class="space-y-4">
+<div>
+<p class="font-label-caps text-slate-400 mb-1">SUBJECT</p>
+<p class="text-lg font-bold text-slate-900">Winter Collection Sneak Peek</p>
+</div>
+<div class="flex gap-8">
+<div>
+<p class="font-label-caps text-slate-400 mb-1">DATE SENT</p>
+<p class="text-sm text-slate-600">October 24, 2023 • 14:32 PM</p>
+</div>
+<div>
+<p class="font-label-caps text-slate-400 mb-1">RECIPIENTS</p>
+<p class="text-sm text-slate-600">VIP Segment (1,240)</p>
+</div>
+</div>
+</div>
+<div class="p-6 bg-slate-50 rounded-xl border border-slate-100">
+<p class="font-label-caps text-slate-400 mb-3">MESSAGE CONTENT</p>
+<p class="text-slate-700 leading-relaxed text-sm">
+                        Dear Valued Customers,<br/><br/>
+                        We are thrilled to give you an exclusive first look at our upcoming Winter 2023 collection. As a VIP member, you get early access to browse the collection before it goes live to the public next week.<br/><br/>
+                        Use code WINTER-VIP for 15% off pre-orders.<br/><br/>
+                        Best regards,<br/>
+                        The LuxeJewel Team
+                    </p>
+</div>
+</div>
+<div class="p-6 border-t border-slate-50 flex justify-end">
+<button class="px-6 py-2 bg-slate-100 text-slate-700 font-bold rounded-lg hover:bg-slate-200 transition-colors" onclick="document.getElementById('msg-modal').classList.add('hidden')">Close Preview</button>
+</div>
+</div>
+</div>
+<!-- Mobile Bottom NavBar (Visible only on small screens) -->
+<nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-purple-50 flex justify-around items-center px-4 h-16 z-50">
+<button class="p-2 text-slate-400 flex flex-col items-center gap-0.5">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-bold">HOME</span>
+</button>
+<button class="p-2 text-slate-400 flex flex-col items-center gap-0.5">
+<span class="material-symbols-outlined" data-icon="diamond">diamond</span>
+<span class="text-[10px] font-bold">STOCK</span>
+</button>
+<button class="p-2 text-primary flex flex-col items-center gap-0.5">
+<span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="text-[10px] font-bold">SETUP</span>
+</button>
+<button class="p-2 text-slate-400 flex flex-col items-center gap-0.5">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="text-[10px] font-bold">ME</span>
+</button>
+</nav>
+</body></html>

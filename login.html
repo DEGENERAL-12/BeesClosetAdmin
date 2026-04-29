@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LuxeJewel Admin Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#342e39",
+                        "on-tertiary-container": "#ffb887",
+                        "inverse-primary": "#d9b9ff",
+                        "secondary": "#645b6d",
+                        "on-background": "#1e1a23",
+                        "tertiary-fixed-dim": "#ffb785",
+                        "on-surface-variant": "#4c4354",
+                        "tertiary-container": "#844100",
+                        "on-secondary": "#ffffff",
+                        "background": "#fff7ff",
+                        "surface-tint": "#7e2bda",
+                        "surface-container-low": "#faf0ff",
+                        "primary-fixed-dim": "#d9b9ff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#4c4354",
+                        "inverse-on-surface": "#f7edfc",
+                        "surface-bright": "#fff7ff",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#efe5f3",
+                        "on-primary-container": "#dabbff",
+                        "on-tertiary-fixed": "#301400",
+                        "on-secondary-fixed": "#201827",
+                        "secondary-fixed-dim": "#cfc2d7",
+                        "primary-fixed": "#eedcff",
+                        "surface": "#fff7ff",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f5eaf9",
+                        "surface-container-highest": "#e9dfed",
+                        "outline": "#7d7386",
+                        "primary": "#5600a2",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#612e00",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#cec2d7",
+                        "on-secondary-container": "#695f71",
+                        "surface-variant": "#e9dfed",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#6400ba",
+                        "surface-dim": "#e0d7e5",
+                        "on-tertiary-fixed-variant": "#713700",
+                        "on-primary-fixed": "#2a0054",
+                        "tertiary-fixed": "#ffdcc6",
+                        "secondary-fixed": "#ebdef3",
+                        "secondary-container": "#e9dbf0",
+                        "primary-container": "#7317cf",
+                        "on-surface": "#1e1a23"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "item-gap": "0.75rem",
+                        "container-padding": "2rem",
+                        "gutter": "1rem",
+                        "card-padding": "1.5rem",
+                        "section-gap": "1.5rem"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Manrope"],
+                        "body-base": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-caps": ["Manrope"],
+                        "display-xl": ["Manrope"],
+                        "body-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["1.25rem", {"lineHeight": "1.75rem", "fontWeight": "700"}],
+                        "body-base": ["0.875rem", {"lineHeight": "1.25rem", "fontWeight": "400"}],
+                        "headline-lg": ["1.5rem", {"lineHeight": "2rem", "fontWeight": "800"}],
+                        "label-caps": ["0.625rem", {"lineHeight": "1rem", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "display-xl": ["1.875rem", {"lineHeight": "2.25rem", "letterSpacing": "-0.025em", "fontWeight": "900"}],
+                        "body-sm": ["0.75rem", {"lineHeight": "1rem", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-base min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<nav class="fixed top-0 z-50 w-full bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-purple-500/10 dark:border-purple-400/10 flex justify-between items-center px-8 py-4">
+<div class="flex items-center gap-2">
+<div class="size-10 rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined">
+    <img src="logo.png" />
+</span>
+</div>
+<span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white font-headline-lg">BeesCloset</span>
+</div>
+
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center px-container-padding pt-24 pb-12 bg-gradient-to-tr from-surface via-surface-container-low to-surface">
+<div class="w-full max-w-md">
+<!-- Login Card -->
+<div class="bg-white border border-primary/10 rounded-xl p-8 shadow-2xl shadow-primary/5">
+<!-- Card Header -->
+<div class="text-center mb-8">
+<div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary-container/10 mb-4">
+<span class="material-symbols-outlined text-primary-container text-2xl" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Admin Login</h1>
+<p class="font-body-base text-body-base text-on-surface-variant">Enter your credentials to access the suite</p>
+</div>
+<!-- Form -->
+<form class="space-y-6" action="index.html">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="block font-label-caps text-label-caps text-outline uppercase" for="email">Email Address</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center text-outline">
+<span class="material-symbols-outlined text-lg">mail</span>
+</span>
+<input class="w-full pl-10 pr-4 py-3 bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary-container transition-all font-body-base text-on-surface" id="email" name="email" placeholder="admin@luxejewel.com" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="block font-label-caps text-label-caps text-outline uppercase" for="password">Password</label>
+<a class="text-body-sm font-body-sm text-primary-container hover:underline transition-all" href="#">Forgot Password?</a>
+</div>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center text-outline">
+<span class="material-symbols-outlined text-lg">lock</span>
+</span>
+<input class="w-full pl-10 pr-4 py-3 bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary-container transition-all font-body-base text-on-surface pr-12" id="password" name="password" placeholder="••••••••" type="password"/><button class="absolute inset-y-0 right-0 pr-3 flex items-center text-outline hover:text-primary-container transition-colors focus:outline-none" id="toggle-password" type="button">
+<span class="material-symbols-outlined text-lg" id="password-icon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center">
+<input class="h-4 w-4 text-primary-container focus:ring-primary-container border-outline-variant rounded" id="remember" name="remember" type="checkbox"/>
+<label class="ml-2 block text-body-sm font-body-sm text-on-surface-variant" for="remember">
+                            Remember me for 30 days
+                        </label>
+</div>
+<!-- Submit Button -->
+<button class="w-full py-3 px-4 bg-primary-container text-on-secondary font-headline-md text-headline-md rounded-full shadow-lg shadow-primary/20 hover:opacity-90 active:opacity-80 transition-all duration-150 flex items-center justify-center gap-2" type="submit">
+                        Sign In
+                        <span class="material-symbols-outlined">login</span>
+</button>
+</form>
+
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-transparent">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 py-6 w-full max-w-7xl mx-auto border-t border-primary/5">
+<p class="font-manrope text-xs tracking-wide text-slate-400 dark:text-slate-500 mb-4 md:mb-0">
+                © <script>document.write(new Date().getFullYear())</script> BeesCloset Administrative Suite. All rights reserved.
+            </p>
+<div class="flex gap-6">
+<a class="font-manrope text-xs tracking-wide text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-all" href="#">Privacy Policy</a>
+<a class="font-manrope text-xs tracking-wide text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-all" href="#">Terms of Service</a>
+<a class="font-manrope text-xs tracking-wide text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-all" href="#">Security</a>
+</div>
+</div>
+</footer>
+<script>
+    document.getElementById('toggle-password').addEventListener('click', function() {
+        const passwordInput = document.getElementById('password');
+        const passwordIcon = document.getElementById('password-icon');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            passwordIcon.textContent = 'visibility_off';
+        } else {
+            passwordInput.type = 'password';
+            passwordIcon.textContent = 'visibility';
+        }
+    });
+</script></body></html>

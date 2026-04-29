@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LuxeJewel | Admin Product Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7317cf",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191121",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="flex min-h-screen relative">
+
+<!-- Sidebar -->
+<div class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden lg:hidden" id="sidebar-overlay" onclick="document.getElementById('mobile-sidebar').classList.add('-translate-x-full'); this.classList.add('hidden')"></div><aside class="fixed inset-y-0 left-0 z-[60] w-64 flex-col bg-white dark:bg-slate-900 border-r border-primary/10 transition-transform duration-300 transform -translate-x-full lg:translate-x-0 flex" id="mobile-sidebar">
+<div class="p-6 flex flex-col h-full"><button class="lg:hidden absolute top-4 right-4 p-2 text-slate-400 hover:text-primary" onclick="document.getElementById('mobile-sidebar').classList.add('-translate-x-full'); document.getElementById('sidebar-overlay').classList.add('hidden')"><span class="material-symbols-outlined">close</span></button>
+<div class="flex items-center gap-3 mb-10">
+<div class="size-20 rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined">
+    <img src="logo.png" />
+</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-lg font-bold leading-none">BeesCloset</h1>
+<p class="text-primary text-xs font-medium uppercase tracking-wider mt-1">Admin Panel</p>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary text-white shadow-lg shadow-primary/20" href="index.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-colors" href="add_product.html">
+<span class="material-symbols-outlined">package_2</span>
+<span class="font-medium">Products</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-colors" href="order.html">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-medium">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-colors" href="customers.html">
+<span class="material-symbols-outlined">group</span>
+<span class="font-medium">Customers</span>
+</a>
+
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-100 dark:border-slate-800">
+<button class="flex w-full items-center gap-3 px-4 py-3 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-medium">Logout</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 lg:ml-64 min-h-screen flex flex-col">
+<!-- Header -->
+<header class="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-primary/10 px-4 lg:px-8 h-16 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<button class="lg:hidden p-2 text-slate-600 dark:text-slate-400" onclick="document.getElementById('mobile-sidebar').classList.remove('-translate-x-full'); document.getElementById('sidebar-overlay').classList.remove('hidden')">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="text-xl font-bold tracking-tight">Dashboard Overview</h2>
+</div>
+<div class="flex items-center gap-3 relative group">
+<div class="items-center gap-2 flex">
+<button class="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">2</span></button>
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-1"></div>
+<div class="flex items-center gap-3 relative group">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold leading-none">Alex Rivera</p>
+<p class="text-xs text-slate-500 mt-1">Super Admin</p>
+</div>
+<div class="size-10 rounded-full bg-primary/20 bg-cover bg-center border-2 border-primary/10" data-alt="Admin user profile avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDy-ePblkwjrWttO1X7bJfQkwpFOUKeKTyk9AgDrRWvqzytMvhekdyMfNI0hn5h7hpLoIJ2v7LvYEEpi595VJDDiqc1vtzs04I1eS0-o6IofMI0hX1PiCVCCUhKKCZJecwf8edish10PMO9_B8RqIQIQkb5x8FXNIdHOm1K1gnWqWscyvFBU2Bpga6Z5F3916FDP8xrb645B-MVp-tXVf_IXYxFtd8q71ioNKzkMvBATwVbufj-VepWJzDvUmV94abCLLRIiaT54Mg')"></div>
+<div class="hidden group-hover:block absolute right-0 top-full mt-2 w-48 bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-primary/10 z-50 py-2 overflow-hidden">
+<a class="flex items-center px-4 py-2.5 text-sm text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-colors font-medium" href="#">My Account</a>
+<a class="flex items-center px-4 py-2.5 text-sm text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-colors font-medium" href="#">My Profile</a>
+<div class="h-px bg-slate-100 dark:bg-slate-800 my-1"></div>
+<a class="flex items-center px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors font-medium" href="#">Logout</a>
+</div></div>
+<div class="hidden group-hover:block absolute right-0 top-full mt-2 w-48 bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-primary/10 z-50 py-2 overflow-hidden">
+<a class="flex items-center px-4 py-2.5 text-sm text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-colors font-medium" href="#">My Account</a>
+<a class="flex items-center px-4 py-2.5 text-sm text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-colors font-medium" href="#">My Profile</a>
+<div class="h-px bg-slate-100 dark:bg-slate-800 my-1"></div>
+<a class="flex items-center px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors font-medium" href="#">Logout</a>
+</div></div>
+</header>
+
+
+<!-- Dashboard Content -->
+<div class="p-4 lg:p-8 space-y-8">
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-2">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-primary/5 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-emerald-500 text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> 12.5%
+                            </span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Revenue</p>
+<h3 class="text-2xl font-bold mt-1">&#8358;128,450.00</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-primary/5 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">shopping_bag</span>
+</div>
+<span class="text-rose-500 text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-sm">trending_down</span> 2.4%
+                            </span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Active Orders</p>
+<h3 class="text-2xl font-bold mt-1">1,240</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-primary/5 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">person_add</span>
+</div>
+<span class="text-emerald-500 text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> 5.2%
+                            </span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">New Customers</p>
+<h3 class="text-2xl font-bold mt-1">850</h3>
+</div>
+</div>
+<!-- Chart & Trends Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Revenue Overview Chart -->
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 p-6 rounded-xl border border-primary/5 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h4 class="text-lg font-bold">Revenue Overview</h4>
+<p class="text-sm text-slate-500">Earnings across the last 7 days</p>
+</div>
+<select class="bg-primary/5 border-none rounded-lg text-xs font-bold text-slate-600 focus:ring-primary">
+<option>Weekly</option>
+<option>Monthly</option>
+</select>
+</div>
+<div class="h-64 flex flex-col justify-end gap-2">
+<div class="flex flex-1 items-end justify-between gap-3 px-2">
+<div class="w-full bg-primary/5 rounded-t-lg h-[40%] hover:bg-primary/20 transition-all cursor-pointer relative group">
+<div class="hidden group-hover:block absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded">12k</div>
+</div>
+<div class="w-full bg-primary/5 rounded-t-lg h-[65%] hover:bg-primary/20 transition-all cursor-pointer relative group">
+<div class="hidden group-hover:block absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded">18k</div>
+</div>
+<div class="w-full bg-primary rounded-t-lg h-[90%] hover:opacity-90 transition-all cursor-pointer relative group">
+<div class="hidden group-hover:block absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded">25k</div>
+</div>
+<div class="w-full bg-primary/5 rounded-t-lg h-[55%] hover:bg-primary/20 transition-all cursor-pointer relative group">
+<div class="hidden group-hover:block absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded">15k</div>
+</div>
+<div class="w-full bg-primary/5 rounded-t-lg h-[75%] hover:bg-primary/20 transition-all cursor-pointer relative group">
+<div class="hidden group-hover:block absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded">21k</div>
+</div>
+<div class="w-full bg-primary/5 rounded-t-lg h-[45%] hover:bg-primary/20 transition-all cursor-pointer relative group">
+<div class="hidden group-hover:block absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded">13k</div>
+</div>
+<div class="w-full bg-primary/5 rounded-t-lg h-[80%] hover:bg-primary/20 transition-all cursor-pointer relative group">
+<div class="hidden group-hover:block absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded">23k</div>
+</div>
+</div>
+<div class="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-widest pt-2 border-t border-slate-100 dark:border-slate-800">
+<span class="w-full text-center">Mon</span>
+<span class="w-full text-center">Tue</span>
+<span class="w-full text-center">Wed</span>
+<span class="w-full text-center">Thu</span>
+<span class="w-full text-center">Fri</span>
+<span class="w-full text-center">Sat</span>
+<span class="w-full text-center">Sun</span>
+</div>
+</div>
+</div>
+<!-- Category Share -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-primary/5 shadow-sm">
+<h4 class="text-lg font-bold mb-4">Top Categories</h4>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between text-sm font-bold mb-1">
+<span>Diamonds</span>
+<span>45%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[45%]"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">circle</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between text-sm font-bold mb-1">
+<span>Gold Rings</span>
+<span>32%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[32%]"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">watch</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between text-sm font-bold mb-1">
+<span>Luxury Watches</span>
+<span>23%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[23%]"></div>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-2 bg-primary/5 hover:bg-primary/10 text-primary text-xs font-bold rounded-lg transition-colors">
+                            Full Category Report
+                        </button>
+</div>
+</div>
+<!-- Recent Orders Table -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-primary/5 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-primary/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<h4 class="text-lg font-bold">Recent Orders</h4>
+<div class="flex items-center gap-2">
+<!-- Filter Dropdown Container -->
+<div class="relative">
+<button class="flex items-center gap-2 px-3 py-2 bg-primary/5 hover:bg-primary/10 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-lg transition-colors" id="filter-btn" onclick="document.getElementById('filter-dropdown').classList.toggle('hidden'); document.getElementById('export-dropdown').classList.add('hidden'); event.stopPropagation();">
+<span class="material-symbols-outlined text-sm">filter_list</span> Filter
+        </button>
+<div class="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-slate-900 border border-primary/10 rounded-xl shadow-xl z-20 py-2" id="filter-dropdown">
+<button class="w-full text-left px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary transition-colors">Date Range</button>
+<button class="w-full text-left px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary transition-colors">Status</button>
+<button class="w-full text-left px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary transition-colors">Category</button>
+<button class="w-full text-left px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary transition-colors">Amount</button>
+</div>
+</div>
+<!-- Export Dropdown Container -->
+<div class="relative">
+<button class="flex items-center gap-2 px-3 py-2 bg-primary/5 hover:bg-primary/10 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-lg transition-colors" id="export-btn" onclick="document.getElementById('export-dropdown').classList.toggle('hidden'); document.getElementById('filter-dropdown').classList.add('hidden'); event.stopPropagation();">
+<span class="material-symbols-outlined text-sm">download</span> Export
+        </button>
+<div class="hidden absolute right-0 mt-2 w-52 bg-white dark:bg-slate-900 border border-primary/10 rounded-xl shadow-xl z-20 py-2" id="export-dropdown">
+<button class="w-full text-left px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">description</span> Download as CSV
+            </button>
+<button class="w-full text-left px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">picture_as_pdf</span> Download as PDF
+            </button>
+<button class="w-full text-left px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">print</span> Print Report
+            </button>
+</div>
+</div>
+</div>
+<script>
+    window.addEventListener('click', function() {
+        document.getElementById('filter-dropdown').classList.add('hidden');
+        document.getElementById('export-dropdown').classList.add('hidden');
+    });
+</script>
+</div>
+<div class="hidden md:block overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Order ID</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Customer</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Product</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Amount</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Status</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Date</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-primary/5">
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-6 py-4 text-sm font-bold text-primary">#LJ-9921</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-100 bg-cover" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBucd4Ih4uKdUtMAqJBzK28XGoUio-2s_tzwX7wL06VLas03pFqPxBOvYpgTqO9hv7SbfgGk3f3cnvkCKL78qU7Iwiymt3yMnwF9l51tE2y_MKqHA90u5C2DGk_LgTYf3YI3KlPofshudKSrhAi13fF6tsOG-wprmF8t7BwU-AEhNpkSee-Y4h9mDUeDtgeBLPFaT1h_c2QfIVNDFlzCywLVyd92Fxfwy_eFTdfSB1aPTBATuPMCoOxg8gPctwRwrxVX0aBNi24oUE')"></div>
+<span class="text-sm font-medium">Elena Rodriguez</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">Solitaire Engagement Ring</td>
+<td class="px-6 py-4 text-sm font-bold">&#8358;4,250.00</td>
+<td class="px-6 py-4"><span class="px-2.5 py-1 text-[10px] font-bold uppercase bg-emerald-100 text-emerald-700 rounded-full">Completed</span></td>
+<td class="px-6 py-4 text-sm text-slate-500">Oct 24, 2023</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-6 py-4 text-sm font-bold text-primary">#LJ-9920</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-100 bg-cover" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBxBoujvw9h0EucRTbdFW_inMRZosclWvN3j4xdjfn1ZDHXyKAabeswsKMIFM6eR02AxicaHN8JWDX_Cfp0ETof2wQUQGJCdOTw0eRweVWm60ivZaVCTtv2koa_JWQBXigh8SM-hlGM1yg0f0UgPqbmqvq2UOR0JcgeVSnpBKzE_vmkHDOdpoFhPIo-2O6HT80s9-KLm1zUa5xnsZbAoHCP6FioZCuR-Knde0Zc7bjdLY7eXxX6MvHBfF0uNei6Z5SBdurLkZacMUE')"></div>
+<span class="text-sm font-medium">Marcus Chen</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">24K Gold Cuban Link Bracelet</td>
+<td class="px-6 py-4 text-sm font-bold">&#8358;2,800.00</td>
+<td class="px-6 py-4"><span class="px-2.5 py-1 text-[10px] font-bold uppercase bg-amber-100 text-amber-700 rounded-full">Processing</span></td>
+<td class="px-6 py-4 text-sm text-slate-500">Oct 23, 2023</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="md:hidden divide-y divide-primary/5">
+<div class="p-4 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-slate-100 bg-cover" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBucd4Ih4uKdUtMAqJBzK28XGoUio-2s_tzwX7wL06VLas03pFqPxBOvYpgTqO9hv7SbfgGk3f3cnvkCKL78qU7Iwiymt3yMnwF9l51tE2y_MKqHA90u5C2DGk_LgTYf3YI3KlPofshudKSrhAi13fF6tsOG-wprmF8t7BwU-AEhNpkSee-Y4h9mDUeDtgeBLPFaT1h_c2QfIVNDFlzCywLVyd92Fxfwy_eFTdfSB1aPTBATuPMCoOxg8gPctwRwrxVX0aBNi24oUE')"></div>
+<div>
+<p class="text-sm font-bold">Elena Rodriguez</p>
+<p class="text-xs text-slate-500">#LJ-9921</p>
+</div>
+</div>
+<span class="px-2 py-0.5 text-[10px] font-bold uppercase bg-emerald-100 text-emerald-700 rounded-full">Completed</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-slate-600">Solitaire Engagement Ring</span>
+<span class="text-sm font-bold">&#8358;4,250.00</span>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-slate-100 bg-cover" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBxBoujvw9h0EucRTbdFW_inMRZosclWvN3j4xdjfn1ZDHXyKAabeswsKMIFM6eR02AxicaHN8JWDX_Cfp0ETof2wQUQGJCdOTw0eRweVWm60ivZaVCTtv2koa_JWQBXigh8SM-hlGM1yg0f0UgPqbmqvq2UOR0JcgeVSnpBKzE_vmkHDOdpoFhPIo-2O6HT80s9-KLm1zUa5xnsZbAoHCP6FioZCuR-Knde0Zc7bjdLY7eXxX6MvHBfF0uNei6Z5SBdurLkZacMUE')"></div>
+<div>
+<p class="text-sm font-bold">Marcus Chen</p>
+<p class="text-xs text-slate-500">#LJ-9920</p>
+</div>
+</div>
+<span class="px-2 py-0.5 text-[10px] font-bold uppercase bg-amber-100 text-amber-700 rounded-full">Processing</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-slate-600">24K Gold Cuban Link Bracelet</span>
+<span class="text-sm font-bold">&#8358;2,800.00</span>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-primary/5 flex items-center justify-between">
+<p class="text-xs text-slate-500 font-medium">Showing 1 to 4 of 120 orders</p>
+<div class="flex gap-2">
+<button class="p-2 border border-primary/10 rounded hover:bg-primary/5">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="p-2 border border-primary/10 rounded hover:bg-primary/5">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<!-- Footer -->
+<footer class="w-full bg-transparent">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 py-6 w-full max-w-7xl mx-auto border-t border-primary/5">
+<p class="font-manrope text-xs tracking-wide text-slate-400 dark:text-slate-500 mb-4 md:mb-0">
+                © <script>document.write(new Date().getFullYear())</script> BeesCloset Administrative Suite. All rights reserved.
+            </p>
+<div class="flex gap-6">
+<a class="font-manrope text-xs tracking-wide text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-all" href="#">Privacy Policy</a>
+<a class="font-manrope text-xs tracking-wide text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-all" href="#">Terms of Service</a>
+<a class="font-manrope text-xs tracking-wide text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-all" href="#">Security</a>
+</div>
+</div>
+</footer>
+
+<div class="md:hidden divide-y divide-primary/5">
+
+</div>
+</div></body></html>
